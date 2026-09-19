@@ -258,6 +258,8 @@ export class BigFile {
 		return this.api.generic('/files/big/move', {
 			method: 'POST',
 			data: `id=${this.id}&pathname=${encodeURIComponent(filepath)}`,
+		}, {
+			"Content-Type": "application/x-www-form-urlencoded"
 		})
 	}
 
@@ -266,10 +268,11 @@ export class BigFile {
 	 * @param path The destination path of the imported ZIP file (default: /)
 	 */
 	async import(path: string = '/') {
-		let limits = await this.api.getFileLimits();
 		return this.api.generic(`/files/import/${this.id}`, {
 			method: "POST",
 			data: `path=${encodeURIComponent(path)}`
+		}, {
+			"Content-Type": "application/x-www-form-urlencoded"
 		})
 	}
 }
